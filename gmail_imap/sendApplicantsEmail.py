@@ -4,7 +4,7 @@ import csv
 import smtplib
 import sys
 
-TESTING_EMAIL = 'rmoore@cs.pitt.edu'
+TESTING_EMAIL = 'timparenti+test@cs.pitt.edu'
 
 def sendNominationEmail(applicantName, email, department, link):
 
@@ -24,9 +24,9 @@ def sendNominationEmail(applicantName, email, department, link):
     subject = 'Nomination: Elizabeth Baranger Excellence in Teaching Award'
     body = """Dear %s,
 
-Congratulations! You have been nominated to compete for the 2013
+Congratulations! You have been nominated to compete for the 2014
 Elizabeth Baranger Excellence in Teaching Award for your teaching during
-the 2012 calendar year. This annual award, sponsored by the University
+the 2013 calendar year. This annual award, sponsored by the University
 of Pittsburgh's Arts & Sciences Graduate Student Organization, was
 created to acknowledge and promote outstanding teaching by graduate
 students at Pitt. Up to six awards of $250 each will be given out; two
@@ -53,8 +53,8 @@ this link:
 
 Details of the application and required materials can be found on the
 webpage listed above.  All application materials, including letters of
-support, must be received by the end of the day on Friday, March 1,
-2013.  Award announcements will be made on or before April 1. 
+support, must be received by the end of the day on Friday, March 7,
+2014.  Award announcements will be made on or about April 1. 
 
 General information about the award can be found at:
 
@@ -117,6 +117,8 @@ if __name__ == '__main__':
     count = 0
 
     for row in csvIn:
+        if len(row) == 0: continue
+        
         if (row[READYTOSENDCOLUMN] in ['True','1']):
             sendNominationEmail(row[FIRSTNAMECOLUMN] + " " + row[LASTNAMECOLUMN], row[EMAILCOLUMN], row[DEPARTMENTCOLUMN], row[LINKCOLUMN])
         else:
