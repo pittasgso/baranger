@@ -13,7 +13,7 @@ except:
 import get_letters
 
 SHOW_CONTACT = False
-GMAIL_LABEL_FORMAT = '2013/%(lastName)s'
+GMAIL_LABEL_FORMAT = '2014/%(lastName)s'
 
 con = None
 
@@ -284,7 +284,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     try:
         print 'main', args
-        #main(args.dbhostname, args.dbusername, args.dbpassword, args.dbdatabase, args.email, args.password)
+        main(args.dbhostname, args.dbusername, args.dbpassword, args.dbdatabase, args.email, args.password)
     except mdb.Error, e:
         print "Error %d: %s" % (e.args[0],e.args[1])
         sys.exit(1)

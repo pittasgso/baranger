@@ -1,0 +1,3 @@
+# Ignore review directory
+create_reviews/review/*
+
