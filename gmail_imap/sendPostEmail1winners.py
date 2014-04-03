@@ -109,7 +109,7 @@ if __name__ == '__main__':
     for row in csvIn:
         if len(row) == 0: continue
         
-        if (row[READYTOSENDCOLUMN] in ['True','1']):
+        if (row[READYTOSENDCOLUMN] in ['True','TRUE','1']):
             sendNominationEmail(row[FIRSTNAMECOLUMN] + " " + row[LASTNAMECOLUMN], row[EMAILCOLUMN], row[DEPARTMENTCOLUMN], row[LINKCOLUMN])
         else:
             print 'Skipped: ', row[FIRSTNAMECOLUMN] + " " + row[LASTNAMECOLUMN]
