@@ -336,6 +336,38 @@ TRUNCATE teachingawardstudent;
 11. Copy and paste the contents of the `injections.sql` file generated earlier and execute them.
 You should now have a fully populated database table to begin accepting applications for the new year.
 
+
+Updating the Application Form
+-
+
+Next, make sure the application form is ready to go for the new year.
+Modify the `teachingawards/application.php` file as necessary.
+The current year should automatically be brought into the script and certain
+elements of the form (like the cutoff date for OMETs) are automatically
+computed accordingly, but you may need to make other modifications if, for
+example, the requirements or any contact information have changed.
+
+Make sure to activate the form by setting the following variable at the top:
+
+~~~ {.php}
+$applicationProcessClosed = false;
+~~~
+
+Since Pitt's Unix server does not support Git (as of 2015), you will need to
+submit your changes via FTP:
+* Host: ewi-prod.cssd.pitt.edu
+* Username: [Your Pitt username]
+* Password: [Your Pitt password]
+You will need to be connected to the
+`Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
+firewall zone as before,
+but your access is handled by your membership in the `AS-ASGSOWebsite Access` CDS group.
+Once logged in, you can find the A&S-GSO website located in the `/asgso` directory,
+alongside other sites you may administer.
+
+Once you've uploaded the new `teachingawards/application.php` file,
+the form is ready to go.
+
 Sending Emails
 -
 
