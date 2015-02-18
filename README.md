@@ -345,12 +345,12 @@ a 1 in their ready-to-send column. Therefore, you may edit the .csv to have 0s
 in most people's ready-to-send columns (i.e., if you need to resend the
 information to a particular person and not resend to all the others).
 
-Be sure proofread sendApplicantsEmail.py to make sure that it will send out the
-appropriate dates etc. I recommend creating your own little dummy
-application_list.csv, putting only 1 dummy applicant's name in it (i.e.,
+**Be sure to proofread** `gmail_imap/sendNominationEmails.py` to make sure that it will send out the
+appropriate dates, etc. I recommend creating your own little dummy version of
+`nomination-listing.csv`, putting only one dummy applicant's name in it (i.e.,
 yourself) and seeing if you receive the email, that all dates are correct, etc.
 
-Then, use the ./sendApplicantsEmail.py script. This script will login as the
+Then, use the `./gmail_imap/sendNominationEmails.py` script. This script will login as the
 barangeraward@gmail.com user, generate emails, and send them.  You can login to
 Gmail manually and examine its sent folder to see the sent emails.
 
@@ -358,12 +358,11 @@ For example:
 
 ~~~
 # Use the filename from the immediately previous substep.
-./sendApplicantsEmail.py application_list.csv
+./gmail_imap/sendNominationEmails.py 02-2015-nomination-listing.csv
 ~~~
 
-Optional: Midway through the application process, maybe resend notifications to
-everyone. Edit the sendApplicantsEmail.py file to let them know that there's X
-weeks left or whatever.
+**Optional:** Midway through the application process, maybe resend notifications to
+everyone. Edit the file to let them know that there's X weeks left or whatever.
 
 Close Applications
 =
