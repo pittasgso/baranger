@@ -386,22 +386,37 @@ if __name__ == '__main__':
 
 **Be sure to proofread** the email text in `gmail_imap/sendNominationEmails.py`
 to make sure that it will send out the
-appropriate dates, etc. I recommend creating your own little dummy version of
-`nomination-listing.csv`, putting only one dummy applicant's name in it (i.e.,
-yourself) and seeing if you receive the email, that all dates are correct, etc.
+appropriate dates, etc. I recommend creating your own little dummy
+`nomination-listing-DUMMY.csv`, putting only one dummy nominee's name in it (i.e.,
+yourself) and seeing if you receive the email, that all dates are correct, etc.:
 
-Then, use the `./gmail_imap/sendNominationEmails.py` script. This script will login as the
-barangeraward@gmail.com user, generate emails, and send them.  You can retrieve the
-password from the [private data repository](https://bitbucket.org/pittasgso/baranger-data)
-on Bitbucket.  Once the script is running, you can login to
-Gmail manually and examine its sent folder to see the sent emails.
+~~~
+# Run a dummy test to see if everything is working
+./gmail_imap/sendNominationEmails.py data/2015/02-2015-nomination-listing-DUMMY.csv
+~~~
 
-For example:
+This script will login as the barangeraward@gmail.com user, generate emails
+from the dummy list you provided, and send them.  You can retrieve the password from the
+[private data repository](https://bitbucket.org/pittasgso/baranger-data) on Bitbucket.
+
+When you run this test, there's a fairly good chance Gmail will raise an
+authentication error of some sort.  Gmail try to implement various security
+measures and these change every year, making it difficult to use "simple
+authentication" methods such as the basic password entry we use in our scripts.
+Follow the instructions in the error message you receive at the command prompt
+to resolve this issue.  As of February 2015, this required navigating to
+https://www.google.com/settings/security/lesssecureapps while logged in and
+turning on "access for less secure apps".
+
+Once everything is working, run the script on the real `nomination-listing.csv` file:
 
 ~~~
 # Use the filename from the immediately previous substep.
 ./gmail_imap/sendNominationEmails.py data/2015/02-2015-nomination-listing.csv
 ~~~
+
+As the script is running, you can login to Gmail manually and examine its Sent
+folder to see the sent emails as they go through.
 
 **Optional:** Midway through the application process, maybe resend notifications to
 everyone. Edit the file to let them know that there's X weeks left or whatever.
