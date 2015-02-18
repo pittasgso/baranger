@@ -395,7 +395,7 @@ yourself) and seeing if you receive the email, that all dates are correct, etc.:
 ./gmail_imap/sendNominationEmails.py data/2015/02-2015-nomination-listing-DUMMY.csv
 ~~~
 
-This script will login as the barangeraward@gmail.com user, generate emails
+This script will login to Gmail, generate emails
 from the dummy list you provided, and send them.  You can retrieve the password from the
 [private data repository](https://bitbucket.org/pittasgso/baranger-data) on Bitbucket.
 
@@ -417,6 +417,13 @@ Once everything is working, run the script on the real `nomination-listing.csv` 
 
 As the script is running, you can login to Gmail manually and examine its Sent
 folder to see the sent emails as they go through.
+
+If there are a large number of notifications to be sent (more than about 75),
+you may encounter a "too many login attempts" error from Gmail.  If this
+happens, determine which email was the last to be successfully sent, and create
+a "continuation" file from the original nomination list by removing the lines
+which were successfully sent.  Wait 10 to 15 minutes before rerunning the
+notification script on this "continuation" file.
 
 **Optional:** Midway through the application process, maybe resend notifications to
 everyone. Edit the file to let them know that there's X weeks left or whatever.
