@@ -1,3 +1,6 @@
 # Ignore review directory
 create_reviews/review/*
 
+# Ignore compiled README
+README.pdf
+
