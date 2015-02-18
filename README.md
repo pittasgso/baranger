@@ -1,6 +1,5 @@
-%Baranger Awards Application Automation Guide
-%A&S GSO Elizabeth Baranger Teaching Award Committee \
-and Communications Committee
+% Baranger Awards Application Automation Guide
+% A&S-GSO Elizabeth Baranger Teaching Award Committee and Communications Committee
 
 About
 =
@@ -280,44 +279,62 @@ full Personal Application URL column.
 Populating the Database
 -
 
-If you can run the above command and the application_list.csv is correct, you 
+If you can run the above command and the "nomination listing" file is correct, you
 should be able to populate the database now.
 
-1. Make sure your Pitt account has access to the A&S GSO MySQL database. CSSD
+You will need to install [MySQL Workbench](http://www.mysql.com/products/workbench/) on your machine.
+
+1. Make sure your Pitt account has access to the A&S-GSO MySQL database. CSSD
 can give permissions. Normal committee members do not need access, only those
 populating the database.
+If you don't have access, the Administrative Assistant should send a
+request to helpdesk@pitt.edu to add your account to:
+    * The ``AS-ASGSOWebsite Access`` CDS group.
+    * The ``Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect``
+      firewall zone.
 
 2. Disconnect any VPN clients already running.
 
-3. Go to sremote.pitt.edu
+3. Connect to Pitt's VPN using your preferred VPN client, or go to sremote.pitt.edu, and
+enter your Pitt username and password, with connection method as "Network
+Connect" (the default). Log in.
 
-3. Enter your Pitt username and password, with connection method as Network
-Connect (the default). Log in.
+4. If using sremote, install any .jar files you are prompted to install.
 
-4. If prompted to install various .jar files, do so.
-
-5. The webpage will list all of the roles you have access to.  Select
-Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect
+5. Once connected, you should see a list all of the roles you have access to.  Select
+``Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect``
 
 6. Click on the start button for "Network Connect" on the webpage.
 
-7. If prompted to install ncLinuxApp.jar then do so.  Eventually, an applet
+7. If prompted to install ncLinuxApp.jar, do so.  Eventually, an applet
 window will pop up.
 
 8. Now you are ready to try to login.
 
-9. Using MySQL Workbench (install this/download it from the Internet) then
-connect to:
-    * Host: ewi-zmysql-01.cssd.pitt.edu
+9. Once you are connected to the proper VPN role, use [MySQL Workbench](http://www.mysql.com/products/workbench/)
+to connect to:
+    * Host: ewi-mysql-02.cssd.pitt.edu
     * Username: asgsouser
-    * Password: [only users with database access need to know this]
+    * Password:
+        * Only users with database access need to know this
+        * It is stored in the [private data repository](https://bitbucket.org/pittasgso/baranger-data)
+          on Bitbucket
 
-10. Copy all information from last year applicants to a new table.
+10. Copy all information from last year applicants to a new database table, and empty the main table.
+In the Query Window, enter and execute the following queries:
 
-11. Empty out the main teaching awards table.
+~~~ {.sql}
+USE asgso;
+-- create new table to archive last year's records
+CREATE TABLE 2014teachingawardstudent LIKE teachingawardstudent;
+-- copy last year's records into the archive table
+INSERT 2014teachingawardstudent SELECT * FROM teachingawardstudent;
+-- empty the main table for the new year
+TRUNCATE teachingawardstudent;
+~~~
 
-11. Copy and paste the contents of your injections.sql and execute them. You
-should now have a populated database/table.
+11. Copy and paste the contents of the ``injections.sql`` file generated earlier and execute them.
+You should now have a fully populated database table to begin accepting applications for the new year.
 
 Sending Emails
 -
