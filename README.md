@@ -289,8 +289,8 @@ can give permissions. Normal committee members do not need access, only those
 populating the database.
 If you don't have access, the Administrative Assistant should send a
 request to helpdesk@pitt.edu to add your account to:
-    * The ``AS-ASGSOWebsite Access`` CDS group.
-    * The ``Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect``
+    * The `AS-ASGSOWebsite Access` CDS group.
+    * The `Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
       firewall zone.
 
 2. Disconnect any VPN clients already running.
@@ -302,7 +302,7 @@ Connect" (the default). Log in.
 4. If using sremote, install any .jar files you are prompted to install.
 
 5. Once connected, you should see a list all of the roles you have access to.  Select
-``Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect``
+`Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
 
 6. Click on the start button for "Network Connect" on the webpage.
 
@@ -333,7 +333,7 @@ INSERT 2014teachingawardstudent SELECT * FROM teachingawardstudent;
 TRUNCATE teachingawardstudent;
 ~~~
 
-11. Copy and paste the contents of the ``injections.sql`` file generated earlier and execute them.
+11. Copy and paste the contents of the `injections.sql` file generated earlier and execute them.
 You should now have a fully populated database table to begin accepting applications for the new year.
 
 Sending Emails
@@ -345,20 +345,30 @@ a 1 in their ready-to-send column. Therefore, you may edit the .csv to have 0s
 in most people's ready-to-send columns (i.e., if you need to resend the
 information to a particular person and not resend to all the others).
 
-**Be sure to proofread** `gmail_imap/sendNominationEmails.py` to make sure that it will send out the
+Double-check that the columns in `nomination-listing.csv` match up with the
+definitions in `gmail_imap/sendNominationEmails.py` under the line which reads:
+
+~~~ {.python}
+if __name__ == '__main__':
+~~~
+
+**Be sure to proofread** the email text in `gmail_imap/sendNominationEmails.py`
+to make sure that it will send out the
 appropriate dates, etc. I recommend creating your own little dummy version of
 `nomination-listing.csv`, putting only one dummy applicant's name in it (i.e.,
 yourself) and seeing if you receive the email, that all dates are correct, etc.
 
 Then, use the `./gmail_imap/sendNominationEmails.py` script. This script will login as the
-barangeraward@gmail.com user, generate emails, and send them.  You can login to
+barangeraward@gmail.com user, generate emails, and send them.  You can retrieve the
+password from the [private data repository](https://bitbucket.org/pittasgso/baranger-data)
+on Bitbucket.  Once the script is running, you can login to
 Gmail manually and examine its sent folder to see the sent emails.
 
 For example:
 
 ~~~
 # Use the filename from the immediately previous substep.
-./gmail_imap/sendNominationEmails.py 02-2015-nomination-listing.csv
+./gmail_imap/sendNominationEmails.py data/2015/02-2015-nomination-listing.csv
 ~~~
 
 **Optional:** Midway through the application process, maybe resend notifications to

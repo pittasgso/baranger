@@ -3,30 +3,28 @@
 import csv
 import smtplib
 import sys
+import getpass
 
 TESTING_EMAIL = 'timparenti+test@cs.pitt.edu'
+
+SMTP_SERVER = 'smtp.gmail.com'
+SMTP_PORT = 587
+sender = 'barangeraward@gmail.com'
+password = ''
 
 def sendNominationEmail(applicantName, email, department, link):
 
 
     """ Based on http://segfault.in/2010/12/sending-gmail-from-python/ """
- 
-    SMTP_SERVER = 'smtp.gmail.com'
-    SMTP_PORT = 587
      
-    sender = 'barangeraward@gmail.com'
-    password = 'PASSWORD_GOES_HERE'
-
-    #Comment out this line to use the passed in recipient's email address.
-
-    realEmail = email
+    # Comment out this line to use the passed-in test recipient's email address instead.
     #email = TESTING_EMAIL
     subject = 'Nomination: Elizabeth Baranger Excellence in Teaching Award'
     body = """Dear %s,
 
-Congratulations! You have been nominated to compete for the 2014
+Congratulations! You have been nominated to compete for the 2015
 Elizabeth Baranger Excellence in Teaching Award for your teaching during
-the 2013 calendar year. This annual award, sponsored by the University
+the 2014 calendar year. This annual award, sponsored by the University
 of Pittsburgh's Arts & Sciences Graduate Student Organization, was
 created to acknowledge and promote outstanding teaching by graduate
 students at Pitt. Up to six awards of $250 each will be given out; two
@@ -41,7 +39,7 @@ distinguished career, Professor Baranger worked tirelessly to improve
 graduate education here at the University of Pittsburgh. We are a
 crucial component of this work. Whether leading a recitation, lab, or
 stand alone course, teaching provides our most public role in our
-graduate education and academic career. This award allows the A&S GSO to
+graduate education and academic career. This award allows the A&S-GSO to
 highlight & reward those graduate students who demonstrate excellence
 and commitment to this important aspect of our academic system.
 
@@ -53,8 +51,8 @@ this link:
 
 Details of the application and required materials can be found on the
 webpage listed above.  All application materials, including letters of
-support, must be received by the end of the day on Friday, March 7,
-2014.  Award announcements will be made on or about April 1. 
+support, must be received by the end of the day on Monday, March 2,
+2015.  Award announcements will be made on or about April 1.
 
 General information about the award can be found at:
 
@@ -102,7 +100,7 @@ if __name__ == '__main__':
     EMAILCOLUMN = 4
     DEPARTMENTCOLUMN = 5
 
-    LINKCOLUMN = 7
+    LINKCOLUMN = 6
 
     try:
         sourceFile = sys.argv[1]
@@ -115,6 +113,9 @@ if __name__ == '__main__':
     header = csvIn.next()
 
     count = 0
+
+    print "Log in as " + sender
+    password = getpass.getpass()
 
     for row in csvIn:
         if len(row) == 0: continue
