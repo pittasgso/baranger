@@ -493,4 +493,6 @@ the PDF guide from the original .md source.
 pandoc --table-of-contents -o README.pdf README.md
 ~~~
 
+The `doc-gen.sh` shell script is provided as a wrapper for this command.
+
 Pandoc also supports HTML output, among others.
