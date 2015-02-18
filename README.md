@@ -12,6 +12,12 @@ The programming and/or code information in this guide is typed from memory
 and/or with a casual glance at code. It may not be exactly right, please revise
 it if it isn't.
 
+For the privacy of nominees and applicants, this project is split amongst two
+repositories using [Git submodules](http://git-scm.com/book/en/v2/Git-Tools-Submodules).
+Please ensure you have access to both repositories:
+* Scripts and documentation: https://github.com/pittasgso/baranger
+* Private nomination/application data: https://bitbucket.org/pittasgso/baranger-data
+
 Timeline
 =
 
