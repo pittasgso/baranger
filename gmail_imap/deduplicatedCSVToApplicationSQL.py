@@ -40,14 +40,14 @@ def simpleEscape(fieldValue):
 try:
     sourceFile = sys.argv[1]
 except IndexError:
-    sourceFile = 'data/'+YEAR+'/01-'+YEAR+'-nominations-deduped.csv'
+    sourceFile = 'data/'+YEAR+'/01-'+YEAR+'-nominations-dedup.csv'
 
 reader = csv.reader(open(sourceFile, 'rb'))
 
 try:
     outFile = sys.argv[2]
 except IndexError:    
-    outFile = 'data/'+YEAR+'/02-'+YEAR+'-application-listing.csv'
+    outFile = 'data/'+YEAR+'/02-'+YEAR+'-nomination-listing.csv'
 
 writer = csv.writer(open(outFile, 'w'))
 writer.writerow(['ready to send','appID','First Name','Last Name', 'Email Address', 'Department', 'Personal Application URL'])

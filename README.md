@@ -270,7 +270,7 @@ for the data to match your filename).
 ~~~
 
 That command will create two files in data/2015, with names like:
-* data/2015/02-2015-application-listing.csv
+* data/2015/02-2015-nomination-listing.csv
 * data/2015/02-2015-injections.sql
 
 Examine the first file in Excel (using File, Open, View all Files) to make sure
