@@ -195,73 +195,86 @@ Condense Nominations and Remove Duplicates
 The Google Drive form will create a spreadsheet with nomination information.
 Someone should go through it and remove duplicates by, for example:
 
-1. Using Google Drive, export the information to an .xls file (or equivalent).
+1. In the ``data'' directory, create a new directory for the current year.
+   All data files should be saved there.
+
+2. Using Google Drive, export the information to an .xlsx file (or equivalent).
     * Avoid modifying the original Drive document. That's why we export
     immediately.
+    * Call this something like ``01-2015-nominations.xlsx''.
 
-2. Open up the exported file in, for example, Microsoft Excel.
+3. Open up the exported file in, for example, Microsoft Excel.
 
-3. Sort by nominees' family name, then by given name.
+4. Sort by nominees' family name, then by given name.
 
-4. Delete rows and remove duplicates manually.
+5. Delete rows and remove duplicates manually.
     * Be sure to consider nicknames or that nominators may misspell things.
     * Using the email address field can be another way to identify duplicates.
     * Sometimes it is necessary to call up department's and verify information.
     * Committee members can later examine the original document to see what
     nominators say about the nominee. This feedback is useful to break ties.
 
-5. Save this deduplicated spreadsheet (e.g., as
-``nominations_2000_nodups.xls'').
-
 6. The application generation scripts do not require all the information seen in
 the nomination form and they do need some extra information added.
-    * Therefore, we will delete some unecessary columns and add a few
+    * Therefore, we will delete some unnecessary columns and add a few
     others.
 
 7. Save the document to a new file (e.g.,
-``nominations_2000_nodups_applications.xls'') then do the following:
+``01-2015-nominations-dedup.csv'') then do the following:
 
     1. Create a new column before all the others, called ``Ready to send''
         * This will mark whether we want to send an email to that person or not.
     2. For all nominees, set their ready to send value to 1.
     3. Rearrange the spreadsheet to make sure that:
-        1. Ready-to-send is the column 0 (i.e., ``A'' in Excel).
-        2. Name is column 1 (i.e., ``B'').
-        3. Pitt email address is column 2.
-        4. Department is column 3.
-
-8. Save this file. 
-9. Save this file also as a .csv file.
+        1. Ready-to-send is column 0 (i.e., ``A'' in Excel).
+        2. First name is column 1 (i.e., ``B'').
+        3. Last name is column 2.
+        4. Email address is column 3.
+        5. Department is column 4.
+       
+	   Regardless of the above, make sure that these column definitions match
+       those at the top of gmail_imap/deduplicatedCSVToApplicationSQL.py,
+       as this will be used in the next step.
 
 Create Applications
 =
 
 This step requires Python 2.7ish. This is typically available on Linux machines.
+It also requires some basic Python coding knowledge.
 
 Generating Application IDs
 -
 
-As necessary, check/update the base URL in deduplicatedCSVToApplicationSQL.py.
-This requires some basic Python coding knowledge. Just look for the line that
-starts with:
+Open gmail_imap/deduplicatedCSVToApplicationSQL.py and update the line near the top that says something like:
+
+~~~ {.python}
+YEAR = '2015'
+~~~
+
+Make sure this is a string.
+
+Also, check/update the base URL for the application pages as necessary.
+Just look for the line that starts with:
 
 ~~~ {.python}
 url = 'http://...'
 ~~~
 
-In the gmail_imap directory, run (change the filename to match your filename).
+Once everything is set, run the following command (changing the filename
+for the data to match your filename).
 
 ~~~ 
 # Generate application ID information and write out the SQL commands. The SQL
 # commands will go to a file called injections.sql
-./deduplicatedCSVToApplicationSQL.py nominations_2000_nodups_applications.csv \
-    > injections.sql
+./gmail_imap/deduplicatedCSVToApplicationSQL.py data/2015/01-2015-nominations-dedup.csv
 ~~~
 
-That command will create a file: application_list.csv.
+That command will create two files in data/2015, with names like:
+* data/2015/02-2015-application-listing.csv
+* data/2015/02-2015-injections.sql
 
-Examine the file in Excel (using File, Open, View all Files) to make sure the
-file is 100% correct.  You will notice that there is now an appID column and a
+Examine the first file in Excel (using File, Open, View all Files) to make sure
+it is 100% correct.  You will notice that there is now an appID column and a
 full Personal Application URL column.
 
 Populating the Database

@@ -5,14 +5,17 @@ import csv
 import random
 import sys
 
-HAS_HEADER = False #is the first row a header for the data? (True = yes, False = no)
+# Is the first row a header for the data? (True = yes, False = no)
+HAS_HEADER = True
 
-#Column A is 0, B is 1, C is 2, ...
+# Column A is 0, B is 1, C is 2, ...
 READYTOSENDCOLUMN = 0 #A
 FIRSTNAMECOLUMN = 1 #B
 LASTNAMECOLUMN = 2 #C
 EMAILCOLUMN = 3 #D
 DEPARTMENTCOLUMN = 4 #E
+
+YEAR = '2015'
 
 random.seed()
 
@@ -37,14 +40,14 @@ def simpleEscape(fieldValue):
 try:
     sourceFile = sys.argv[1]
 except IndexError:
-    sourceFile = '2014-nominations-nodups-apps'
+    sourceFile = 'data/'+YEAR+'/01-'+YEAR+'-nominations-deduped.csv'
 
 reader = csv.reader(open(sourceFile, 'rb'))
 
 try:
     outFile = sys.argv[2]
 except IndexError:    
-    outFile = '2014-application_listing.csv'
+    outFile = 'data/'+YEAR+'/02-'+YEAR+'-application-listing.csv'
 
 writer = csv.writer(open(outFile, 'w'))
 writer.writerow(['ready to send','appID','First Name:','Last Name:', 'Pitt Email', 'Department', 'Phone Number', 'Personal Application URL'])
@@ -53,7 +56,7 @@ writer.writerow(['ready to send','appID','First Name:','Last Name:', 'Pitt Email
 try:
     sqlFile = sys.argv[3]
 except IndexError:
-    sqlFile = '2014-injections.sql'
+    sqlFile = 'data/'+YEAR+'/02-'+YEAR+'-injections.sql'
 
 sql_injection_output = ''
 
