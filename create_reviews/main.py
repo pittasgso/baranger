@@ -13,7 +13,7 @@ except:
 import get_letters
 
 SHOW_CONTACT = False
-GMAIL_LABEL_FORMAT = '2014/%(lastName)s'
+GMAIL_LABEL_FORMAT = '2015/%(lastName)s'
 
 con = None
 
@@ -274,10 +274,10 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('--email', '-e', help="Username of the email address the letters of recommendation are sent to.", default="barangeraward")
-    parser.add_argument('--password', '-p', help="Password for the email address the letters of recommendation are sent to.", default="PASSWORD_GOES_HERE")
-    parser.add_argument('--dbhostname', help="Hostname of the database", default="EWI-MYSQL-02.cssd.pitt.edu")
+    parser.add_argument('--password', '-p', help="Password for the email address the letters of recommendation are sent to.")
+    parser.add_argument('--dbhostname', help="Hostname of the database", default="ewi-mysql-02.cssd.pitt.edu")
     parser.add_argument('--dbusername', help="Username for the database", default="asgsouser")
-    parser.add_argument('--dbpassword', help="Password for the database", default="@$G$0U$3r")
+    parser.add_argument('--dbpassword', help="Password for the database")
     parser.add_argument('--dbdatabase', help="Database to use", default="asgso")
     
     

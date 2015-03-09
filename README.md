@@ -177,7 +177,7 @@ interest in the information during the advertisement process.
 Accept Nominations
 =
 
-Use Google Drive and the barangeraward@gmail.com account to create a nomination
+Use Google Drive and the barangeraward account to create a nomination
 form. Forms from past years are on there as examples. Make the form open, so
 that it can accept submissions. Link to the nomination form in emails,
 advertisements, and the general A&S GSO site. After the deadline, close the form
@@ -442,7 +442,7 @@ $applicationProcessClosed = true;
 Prepare Review Material
 =
 
-Once the applications are closed, you will want to create documents for the
+Once the applications are closed, you will want to compile all of the documents for the
 reviewers to look at.
 
 Organize Recommendation Emails
@@ -457,31 +457,31 @@ year/lastName
 ~~~
 
 That is, create a label for the year of the award and a sublabel for the
-student's last name.  For example, if it is the 2013-2014 academic year and you
+student's last name.  For example, if it is the 2014-2015 academic year and you
 received a letter of recommendation for Bruce Wayne, label it:
 
 ~~~
-2014/Wayne
+2015/Wayne
 ~~~
 
 Once you decide on a format to label the recommendation letters, you must
-change the file ''create_reviews/main.py'', around line 15, where it starts with
-''GMAIL_LABEL_FORMAT = ''.  Even if you stick with the ''year/lastName''
-format, you will need to modify the file to change the year.
+change the file `create_reviews/main.py`, around line 15, where it starts with
+`GMAIL_LABEL_FORMAT = `.  Even if you stick with the `year/lastName`
+format, you will need to modify the file here to change the current year.
 
 What if two people have the same last name, e.g. ''Bruce Wayne'' and
-''Pauline Wayne''?  Give them different labels, such as ''2014/BruceWayne''
-and ''2014/PaulineWayne''.  You let everyone else have the standard label
-(e.g. ''2014/Kent'' for ''Clark Kent'').
+''Pauline Wayne''?  Give them different labels, such as `2015/WayneB`
+and `2015/WayneP`.  You let everyone else have the standard label
+(e.g. `2015/Kent` for ''Clark Kent'').
 
 Create Reviews
 -
-To create the reviews, you will need to connect to the VPN
-(Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect)
-as described above.
+To create the reviews, you will need to connect to the VPN with the
+`Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
+role as described above.
 
 Once connected, we need to check a few settings before creating the reviews.
-In the create_reviews directory, run:
+In the `create_reviews` directory, run:
 
 ~~~
 python main.py -h
@@ -501,14 +501,14 @@ optional arguments:
                         recommendation are sent to. (default: barangeraward)
   --password PASSWORD, -p PASSWORD
                         Password for the email address the letters of
-                        recommendation are sent to. (default: ***********)
+                        recommendation are sent to. (default: None)
   --dbhostname DBHOSTNAME
-                        Hostname of the database (default: EWI-
-                        MYSQL-02.cssd.pitt.edu)
+                        Hostname of the database (default: ewi-
+                        mysql-02.cssd.pitt.edu)
   --dbusername DBUSERNAME
                         Username for the database (default: asgsouser)
   --dbpassword DBPASSWORD
-                        Password for the database (default: *********)
+                        Password for the database (default: None)
   --dbdatabase DBDATABASE
                         Database to use (default: asgso)
 ~~~
