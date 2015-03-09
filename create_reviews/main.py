@@ -1,5 +1,5 @@
 #!/bin/bash
-import MySQLdb as mdb
+import pymysql as mdb
 import sys, os
 import argparse
 from string import Template

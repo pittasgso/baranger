@@ -4,3 +4,6 @@ create_reviews/review/*
 # Ignore compiled README
 README.pdf
 
+# Ignore compiled Python files
+*.pyc
+

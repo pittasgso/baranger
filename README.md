@@ -474,6 +474,16 @@ What if two people have the same last name, e.g. ''Bruce Wayne'' and
 and `2015/WayneP`.  You let everyone else have the standard label
 (e.g. `2015/Kent` for ''Clark Kent'').
 
+Install Dependencies
+-
+Before running these scripts, you must [install `pip`](https://pip.pypa.io/en/latest/installing.html),
+a Python package manager.  Then, from the `create_reviews` directory,
+install the necessary dependencies on your system by running:
+
+~~~
+pip install --user -r requirements.txt
+~~~
+
 Create Reviews
 -
 To create the reviews, you will need to connect to the VPN with the
