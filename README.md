@@ -484,13 +484,9 @@ install the necessary dependencies on your system by running:
 pip install --user -r requirements.txt
 ~~~
 
-Create Reviews
+Check Settings
 -
-To create the reviews, you will need to connect to the VPN with the
-`Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
-role as described above.
-
-Once connected, we need to check a few settings before creating the reviews.
+Before creating the reviews, we need to check a few settings.
 In the `create_reviews` directory, run:
 
 ~~~
@@ -524,30 +520,38 @@ optional arguments:
 ~~~
 
 What is of interest to us are the defaults.  Are those values still the
-correct email and database values?  If they are, then just run (in the create_reviews
-directory):
+correct email and database values?  If they need permanent changing, modify
+the default values in `create_reviews/main.py` under the line which reads:
 
-~~~
-python main.py
-~~~
-
-If they aren't, then we'll need to specify the new value.  For example, 
-if the email account's password has changed from: ''***********'' to:
-``supersecretpassword'', then run the following command (in the create_reviews
-directory):
-
-~~~
-python main.py --password "supersecretpassword"
+~~~ {.python}
+if __name__ == '__main__':
 ~~~
 
-If both the email's password has changed (to ''supersecretpassword'') and
-the database password has changed (to ``DB secretpassword''), then run:
+Otherwise, we can simply override any of these values with an extra flag
+at runtime.  For example, if the letters of recommendation were sent to
+otherusername, append `--email otherusername` when running the main program
+below.
+
+Create Reviews
+-
+To create the reviews, you will need to connect to the VPN with the
+`Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
+role as described above.
+
+Now, in the `create_reviews` directory, run:
 
 ~~~
-python main.py --password "supersecretpassword" --dbpassword "DB secretpassword"
+python main.py --password "EMAIL_PASSWORD" --dbpassword "DB_PASSWORD"
 ~~~
 
-At this point, you should be running main.py.  This will log into the Gmail
+where `EMAIL_PASSWORD` and `DB_PASSWORD` are the email and database passwords,
+respectively, available from the
+[private data repository](https://bitbucket.org/pittasgso/baranger-data) on Bitbucket.
+Be sure to keep the surrounding quotation marks, especially if either password
+contains special characters.
+If any additional flags were deemed necessary above, be sure to pass those in as well.
+
+At this point, the `create_reviews/main.py` script will log into the Gmail
 account and download the letters of recommendation.  It'll also go to the 
 teaching award database and download the saved information.  It'll then try
 to match up the letters to the information from the database.  As it does this,
@@ -564,15 +568,15 @@ Please enter true label:
 In the example above, it is asking you to enter the Gmail label for Bruce Wayne
 because it couldn't find the label.  This could happen because Bruce Wayne may
 have used a different last name in the application than you used in the Gmail label.
-It may also have happened because two people had the same last name (e.g. ''Bruce
-Wayne'' and ``Pauline Wayne'') and so you gave both of them different labels.
+It may also have happened because two people had the same last name (e.g. "Bruce
+Wayne" and "Pauline Wayne") and so you gave both of them different labels.
 
-Log in to the gmail account, find the appropriate label, and enter it into the
-program.  For the example above, you may have decided to include the full name
-(i.e. ''BruceWayne''), so enter ``2014/BruceWayne''.
+Log in to the Gmail account, find the appropriate label, and enter the full label name into the
+program.  For the example above, you may have decided to add the first initial
+(i.e. ''WayneB''), so enter ``2015/WayneB''.
 
-When the program completes, the reviews will be in the folder ''review'' within
-the ''create_reviews'' folder.  Open the ''index.html'' file and go through each
+When the program completes, the reviews will be in the folder `review` within
+the `create_reviews` folder.  Open the `index.html` file and go through each
 review to make sure things look right.  In particular, check that the letters of
 recommendation are correct!  If something's wrong, you can manually make changes
 to the html file and/or delete things by going into the student's subfolder (the
