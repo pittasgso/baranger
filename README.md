@@ -341,7 +341,7 @@ Updating the Application Form
 -
 
 Next, make sure the application form is ready to go for the new year.
-Modify the `teachingawards/application.php` file as necessary.
+Modify the `teachingawards/application.php` file in the A&S-GSO website as necessary.
 The current year should automatically be brought into the script and certain
 elements of the form (like the cutoff date for OMETs) are automatically
 computed accordingly, but you may need to make other modifications if, for
@@ -431,8 +431,13 @@ everyone. Edit the file to let them know that there's X weeks left or whatever.
 Close Applications
 =
 
-There is a closed application boolean flag in the A&S GSO site's
-teachingawards/teachingawards.php or something like that.
+When the deadline for applications has passed, close the application form by
+editing `teachingawards/application.php` in the A&S-GSO website, setting the
+following variable at the top:
+
+~~~ {.php}
+$applicationProcessClosed = true;
+~~~
 
 Prepare Review Material
 =
