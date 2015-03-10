@@ -79,9 +79,11 @@ html_page = '''<html>
     <hr/>
     <div style='padding-bottom:1ex;padding-top:1ex;'>
         <div class='header'>Letters of Support</div>
+        <div style='font-weight:bold;'>Expected Letters</div>
         <div>Writer 1: $writer1Info</div>
         <div>Writer 2: $writer2Info</div>
         <div>Writer 3 (optional): $writer3Info</div>
+        <div style='font-weight:bold;'>Received Letters</div>
         $letters
     </div>
 </body>
@@ -94,14 +96,14 @@ html_contact='''<div>Email address: <a href='mailto:$pittUsername'>$pittUsername
         <div>Phone Number: <pre>$phoneNumber</pre></div>'''
 
 html_courseinfo = '''<div style='font-weight:bold;'>Course #%(count)s</div>
-        <ol>
+        <ul>
             <li>Department: %(dept)s</li>
             <li>Course Number: %(num)s</li>
             <li>Course Role: %(role)s</li>
             <li>Number of sections responsible for: %(sections)s</li>
             <li>Number of Students: %(stucount)s</li>
             <li>OMET Score: %(omet)s</li>
-        </ol>'''
+        </ul>'''
 
 html_email = '''<html>
 <head>
@@ -176,6 +178,7 @@ def generate_content(row, top_output_dir, skip_if_exists=False):
         emails = []
     else:
         emails = get_letters.get_emails(label)
+
     for email in emails:
         if email.From == row['pittUsername']: continue
         email_output_dir = os.path.join(output_dir, str(email.timestamp))
@@ -208,7 +211,10 @@ def generate_content(row, top_output_dir, skip_if_exists=False):
         outfile.write(content)
         outfile.close()
         letters.append('<li><a href="'+os.path.join(email_rel_dir, 'index.html')+'">'+email.From+' &mdash; '+sendDate+'</a></li>')
+
     row['letters'] = '\n'.join(letters)
+    if len(emails) == 0:
+        row['letters'] = '<li>None received.</li>'
     
     #Course Info.
     cur = con.cursor()
