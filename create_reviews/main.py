@@ -2,6 +2,8 @@
 import pymysql as mdb
 import sys, os
 import argparse
+from dateutil.parser import parse
+from pytz import timezone
 from string import Template
 from time import sleep
 try:
@@ -16,6 +18,8 @@ SHOW_CONTACT = False
 GMAIL_LABEL_FORMAT = '2015/%(lastName)s'
 
 con = None
+
+localTZ = timezone('America/New_York')
 
 html_index = '''<html>
 <head>
@@ -195,14 +199,15 @@ def generate_content(row, top_output_dir, skip_if_exists=False):
             attachments = '\n'.join(attachments)
             attachments = 'Attachments:<ul>' + attachments + '</ul>'
         
-        content = html_email % {'from' : email.From, 'subject' : email.Subject, 'body' : email.Body, 'timestamp' : email.date, 'attachments' : attachments}
+        sendDate = parse(email.date).astimezone(localTZ).strftime('%a %d %b %Y, %H:%M:%S %Z')
+        content = html_email % {'from' : email.From, 'subject' : email.Subject, 'body' : email.Body, 'timestamp' : sendDate, 'attachments' : attachments}
         
         output_filename = os.path.join(email_output_dir, 'index.html')
         
         outfile = open(output_filename, 'w')
         outfile.write(content)
         outfile.close()
-        letters.append('<li><a href="'+os.path.join(email_rel_dir, 'index.html')+'">'+email.From+', '+email.date+'</a></li>')
+        letters.append('<li><a href="'+os.path.join(email_rel_dir, 'index.html')+'">'+email.From+' &mdash; '+sendDate+'</a></li>')
     row['letters'] = '\n'.join(letters)
     
     #Course Info.

@@ -2,4 +2,6 @@
 # See README.md for installation instructions
 
 pymysql
+python-dateutil
+pytz
 
