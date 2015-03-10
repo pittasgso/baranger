@@ -532,9 +532,9 @@ at runtime.  For example, if the letters of recommendation were sent to
 otherusername, append `--email otherusername` when running the main program
 below.
 
-Create Reviews
+Create Application Reviews
 -
-To create the reviews, you will need to connect to the VPN with the
+To create the application reviews, you will need to connect to the VPN with the
 `Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
 role as described above.
 

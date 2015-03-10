@@ -15,7 +15,8 @@ except:
 import get_letters
 
 SHOW_CONTACT = False
-GMAIL_LABEL_FORMAT = '2015/%(lastName)s'
+YEAR = '2015'
+GMAIL_LABEL_FORMAT = YEAR+'/%(lastName)s'
 
 con = None
 
@@ -23,28 +24,29 @@ localTZ = timezone('America/New_York')
 
 html_index = '''<html>
 <head>
-    <title>Index Page for Review Material</title>
+    <title>%(year)s Baranger Award Application Review Materials</title>
 </head>
 <body>
+    <h1>%(year)s Baranger Award Application Review Materials</h1>
     <ol>
     %(list)s
     </ol>
 </body>
 </html>
 '''
-html_index_entry = '%(firstName)s %(lastName)s (%(department)s)'
+html_index_entry = '%(lastName)s, %(firstName)s &mdash; %(department)s'
 
 html_page = '''<html>
 <head>
-    <title>Review Material for $firstName $lastName</title>
+    <title>[%(number)s] $lastName, $firstName &mdash; Review Material</title>
     <style type='text/css'>
+        div.name { margin-bottom:0.5ex; font-size:200%%; font-weight:bold; }
         div.header { margin-bottom:0.5ex; font-size:large; font-weight:bold; }
     </style>
 </head>
 <body>
     <div style='padding-bottom:1ex;padding-top:1ex;'>
-        <div class='header'>Basic Information</div>
-        <div>Name: $firstName $lastName</div>
+        <div class='name'>[%(number)s] $lastName, $firstName</div>
         <div>Department: $department</div>
         <div>Years of study: $yearsOfStudy</div>
         %(contactInfo)s
@@ -111,7 +113,7 @@ html_email = '''<html>
 <body>
     <div><b>From:</b> %(from)s</div>
     <div><b>Subject:</b> %(subject)s</div>
-    <div><b>Time:</b> %(timestamp)s</div>
+    <div><b>Date:</b> %(timestamp)s</div>
     <hr/>
     <div>%(body)s</div>
     <hr/>
@@ -120,7 +122,7 @@ html_email = '''<html>
 </html>
 '''
 
-def generate_content(row, top_output_dir, skip_if_exists=False):
+def generate_content(number, row, top_output_dir, skip_if_exists=False):
     #create the output directory
     applicant_name = (row['lastName'] + ' ' + row['firstName']).replace(' ', '-').lower()
     output_dir = os.path.join(top_output_dir, applicant_name)
@@ -232,8 +234,8 @@ def generate_content(row, top_output_dir, skip_if_exists=False):
     
     
     #generate index.html
-    if SHOW_CONTACT: html = html_page % {'contactInfo' : html_contact}
-    else: html = html_page % {'contactInfo' : ''}
+    if SHOW_CONTACT: html = html_page % {'number' : str(number), 'contactInfo' : html_contact}
+    else: html = html_page % {'number' : str(number), 'contactInfo' : ''}
     
     html = Template(html)
     output = html.safe_substitute(**row)
@@ -268,19 +270,18 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
     index_entries = []
     print numrows, 'rows returned\n'
 
-    for i in range(numrows):
+    for i in range(1,numrows+1):
         row = cur.fetchone()
         print '----------'
-        print str(i+1)+'/'+str(numrows), row['appID'], (row['lastName'] + ', ' + row['firstName'])
-        output_filename = generate_content(row, top_output_dir, skip_if_exists=skip_student_if_exists)
+        print str(i)+'/'+str(numrows), row['appID'], (row['lastName'] + ', ' + row['firstName'])
+        output_filename = generate_content(i, row, top_output_dir, skip_if_exists=skip_student_if_exists)
         
         submitted = '' if row['submitted']==1 else '[not submitted]'
         index_entries.append((html_index_entry % row, output_filename, submitted))
     
-    index_entries.sort()
     index_entries = ['<li style="padding-bottom:0.5ex;"><a href="%s">%s</a> %s</li>' % (i[1], i[0], i[2]) for i in index_entries]
     index_entries = '\n'.join(index_entries)
-    html = html_index % {'list' : index_entries}
+    html = html_index % {'list' : index_entries, 'year' : YEAR}
     
     outfile = open(os.path.join(top_output_dir, 'index.html'), 'w')
     outfile.write(html)
