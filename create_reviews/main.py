@@ -1,6 +1,6 @@
 #!/bin/bash
 import pymysql as mdb
-import sys, os
+import sys, os, re
 import argparse
 from dateutil.parser import parse
 from pytz import timezone
@@ -124,7 +124,7 @@ html_email = '''<html>
 
 def generate_content(number, row, top_output_dir, skip_if_exists=False):
     #create the output directory
-    applicant_name = (row['lastName'] + ' ' + row['firstName']).replace(' ', '-').lower()
+    applicant_name = re.sub('[^\w]', '-', (row['lastName'] + ' ' + row['firstName']).lower())
     output_dir = os.path.join(top_output_dir, applicant_name)
     relative_dir = os.path.join(applicant_name)
     if not os.path.exists(output_dir):
