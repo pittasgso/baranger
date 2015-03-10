@@ -248,13 +248,13 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
         print 'making', top_output_dir
         os.mkdir(top_output_dir)
     
-    cur.execute("SELECT appID, firstName, lastName, pittUsername, department, yearsOfStudy, onCampusAddress, offCampusAddress, phoneNumber, teachingPhilosophy, teachingChallenge, teachingReflection, exampleOfWrittenTeachingMaterial, ometEvaluation1, ometEvaluation2, letterOfSupportSenderName1, letterOfSupportSenderEmail1, letterOfSupportSenderRelationship1, letterOfSupportSenderName2, letterOfSupportSenderEmail2, letterOfSupportSenderRelationship2, letterOfSupportSenderName3, letterOfSupportSenderEmail3, letterOfSupportSenderRelationship3, submitted FROM teachingawardstudent")
+    cur.execute("SELECT appID, firstName, lastName, pittUsername, department, yearsOfStudy, onCampusAddress, offCampusAddress, phoneNumber, teachingPhilosophy, teachingChallenge, teachingReflection, exampleOfWrittenTeachingMaterial, ometEvaluation1, ometEvaluation2, letterOfSupportSenderName1, letterOfSupportSenderEmail1, letterOfSupportSenderRelationship1, letterOfSupportSenderName2, letterOfSupportSenderEmail2, letterOfSupportSenderRelationship2, letterOfSupportSenderName3, letterOfSupportSenderEmail3, letterOfSupportSenderRelationship3, submitted FROM teachingawardstudent ORDER BY submitted DESC, lastName ASC, firstName ASC")
     
     numrows = int(cur.rowcount)
     index_entries = []
     for i in range(numrows):
         row = cur.fetchone()
-        print str(i+1)+'/'+str(numrows), row['appID'], row['lastName']
+        print str(i+1)+'/'+str(numrows), row['appID'], (row['lastName'] + ', ' + row['firstName'])
         output_filename = generate_content(row, top_output_dir, skip_if_exists=skip_student_if_exists)
         
         submitted = '' if row['submitted']==1 else '[not submitted]'
