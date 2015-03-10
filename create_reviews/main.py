@@ -125,8 +125,17 @@ html_email = '''<html>
 def generate_content(number, row, top_output_dir, skip_if_exists=False):
     #create the output directory
     applicant_name = re.sub('[^\w]', '-', (row['lastName'] + ' ' + row['firstName']).lower())
-    output_dir = os.path.join(top_output_dir, applicant_name)
-    relative_dir = os.path.join(applicant_name)
+    if row['submitted'] == 1:
+        midlevel_dir = 'applicant'
+    else:
+        midlevel_dir = 'unsubmitted'
+    midlevel_path = os.path.join(top_output_dir, midlevel_dir)
+    if not os.path.exists(midlevel_path):
+        print 'creating directory', midlevel_path
+        os.mkdir(midlevel_path)
+
+    output_dir = os.path.join(top_output_dir, midlevel_dir, applicant_name)
+    relative_dir = os.path.join(midlevel_dir, applicant_name)
     if not os.path.exists(output_dir):
         print 'creating directory', output_dir
         os.mkdir(output_dir)
@@ -249,7 +258,7 @@ def generate_content(number, row, top_output_dir, skip_if_exists=False):
     #return the index file (relative to the main index.html)
     return os.path.join(relative_dir, 'index.html')
 
-def main(db_hostname, db_username, db_password, database, email_username, email_password, top_output_dir='review'):
+def main(db_hostname, db_username, db_password, database, email_username, email_password, top_output_dir='baranger-applications'):
     skip_student_if_exists=False
     global con
     print 'Connecting to database...'
@@ -259,16 +268,16 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
     print 'Connecting to Gmail...'
     get_letters.connect(email_username, email_password)
     
-    if not os.path.exists(top_output_dir):
-        print 'Creating directory', top_output_dir
-        os.mkdir(top_output_dir)
-    
     print 'Executing database query...'
     cur.execute("SELECT appID, firstName, lastName, pittUsername, department, yearsOfStudy, onCampusAddress, offCampusAddress, phoneNumber, teachingPhilosophy, teachingChallenge, teachingReflection, exampleOfWrittenTeachingMaterial, ometEvaluation1, ometEvaluation2, letterOfSupportSenderName1, letterOfSupportSenderEmail1, letterOfSupportSenderRelationship1, letterOfSupportSenderName2, letterOfSupportSenderEmail2, letterOfSupportSenderRelationship2, letterOfSupportSenderName3, letterOfSupportSenderEmail3, letterOfSupportSenderRelationship3, submitted FROM teachingawardstudent ORDER BY submitted DESC, lastName ASC, firstName ASC")
     
     numrows = int(cur.rowcount)
     index_entries = []
     print numrows, 'rows returned\n'
+
+    if not os.path.exists(top_output_dir):
+        print 'Creating directory', top_output_dir
+        os.mkdir(top_output_dir)
 
     for i in range(1,numrows+1):
         row = cur.fetchone()
@@ -303,7 +312,7 @@ if __name__ == '__main__':
     try:
         print 'main', args
         # UNCOMMENT THE LINE BELOW WHEN READY TO GENERATE THE REVIEW FILES
-        main(args.dbhostname, args.dbusername, args.dbpassword, args.dbdatabase, args.email, args.password)
+        main(args.dbhostname, args.dbusername, args.dbpassword, args.dbdatabase, args.email, args.password, 'baranger-applications-'+YEAR)
     except mdb.Error, e:
         print "Error %d: %s" % (e.args[0],e.args[1])
         sys.exit(1)

@@ -1,5 +1,5 @@
-# Ignore review directory
-create_reviews/review/*
+# Ignore review directories
+create_reviews/baranger-applications*
 
 # Ignore compiled README
 README.pdf

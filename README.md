@@ -587,12 +587,12 @@ Log in to the Gmail account, find the appropriate label, and enter the full labe
 program.  For the example above, you may have decided to add the first initial
 (i.e. ''WayneB''), so enter ``2015/WayneB''.
 
-When the program completes, the reviews will be in the folder `review` within
+When the program completes, the reviews will be a folder like `baranger-applications-2015` within
 the `create_reviews` folder.  Open the `index.html` file and go through each
 review to make sure things look right.  In particular, check that the letters of
 recommendation are correct!  If something's wrong, you can manually make changes
 to the html file and/or delete things by going into the student's subfolder (the
-folder names are the applicants' Pitt usernames).
+folder names are based on the applicants' names).
 
 Once you've checked everything, zip up the entire review folder.  Since the file
 is so big, you'll probably need to put it online for the reviewers to access.
