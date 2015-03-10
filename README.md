@@ -585,7 +585,7 @@ Wayne" and "Pauline Wayne") and so you gave both of them different labels.
 
 Log in to the Gmail account, find the appropriate label, and enter the full label name into the
 program.  For the example above, you may have decided to add the first initial
-(i.e. ''WayneB''), so enter ``2015/WayneB''.
+(i.e. ''WayneB''), so enter `2015/WayneB`.
 
 When the program completes, the reviews will be a folder like `baranger-applications-2015` within
 the `create_reviews` folder.  Open the `index.html` file and go through each
@@ -594,12 +594,13 @@ recommendation are correct!  If something's wrong, you can manually make changes
 to the html file and/or delete things by going into the student's subfolder (the
 folder names are based on the applicants' names).
 
-Once you've checked everything, zip up the entire review folder.  Since the file
-is so big, you'll probably need to put it online for the reviewers to access.
-Since Pitt uses Box, upload the zip file to Box and set the sharing permissions such
+Once you've checked everything, zip up the entire folder.  Be sure to use the
+`.zip` format since most reviewers will be familiar with it.  Since the file
+will be quite large, [upload the zip file to Box](https://pitt.app.box.com/)
+and set the sharing permissions such
 that anyone with the link can access the file.  Be sure to delete the zip file
-once the winners have been selected.  Box can be set to do this automatically
-(just set the expiration date to be in May).
+once the winners have been selected.  You can easily do this by setting the
+"link expiration" date to April 30.
 
 
 Review Applications
