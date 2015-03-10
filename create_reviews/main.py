@@ -116,9 +116,9 @@ html_email = '''<html>
 
 def generate_content(row, top_output_dir, skip_if_exists=False):
     #create the output directory
-    username = row['pittUsername'].split('@')[0]
-    output_dir = os.path.join(top_output_dir, username)
-    relative_dir = os.path.join(username)
+    applicant_name = (row['lastName'] + ' ' + row['firstName']).replace(' ', '-').lower()
+    output_dir = os.path.join(top_output_dir, applicant_name)
+    relative_dir = os.path.join(applicant_name)
     if not os.path.exists(output_dir):
         print 'making', output_dir
         os.mkdir(output_dir)
