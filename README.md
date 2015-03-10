@@ -573,8 +573,8 @@ If you see the following, that means it was unable to find the Gmail label for
 the particular applicant automatically:
 
 ~~~
-Folder not found for Bruce Wayne (appID=qNOloaCie3gmNMSW).
-Please enter true label: 
+Gmail label not found for Wayne, Bruce (expected '2015/Wayne').
+Please enter true Gmail label (or blank if none): 
 ~~~
 
 In the example above, it is asking you to enter the Gmail label for Bruce Wayne

@@ -184,7 +184,7 @@ def generate_content(number, row, top_output_dir, skip_if_exists=False):
         else:
             #they entered letter writers
             beep()
-            label = raw_input('Gmail label not found for '+row['firstName']+' '+row['lastName']+' (appID='+row['appID']+').\nPlease enter true Gmail label (or blank if none): ')
+            label = raw_input('Gmail label not found for '+row['lastName']+', '+row['firstName']+' (expected \''+label+'\').\nPlease enter true Gmail label (or blank if none): ')
     if label == '':
         emails = []
     else:
@@ -268,12 +268,12 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
     print 'Connecting to Gmail...'
     get_letters.connect(email_username, email_password)
     
-    print 'Executing database query...'
+    print 'Loading database into memory...'
     cur.execute("SELECT appID, firstName, lastName, pittUsername, department, yearsOfStudy, onCampusAddress, offCampusAddress, phoneNumber, teachingPhilosophy, teachingChallenge, teachingReflection, exampleOfWrittenTeachingMaterial, ometEvaluation1, ometEvaluation2, letterOfSupportSenderName1, letterOfSupportSenderEmail1, letterOfSupportSenderRelationship1, letterOfSupportSenderName2, letterOfSupportSenderEmail2, letterOfSupportSenderRelationship2, letterOfSupportSenderName3, letterOfSupportSenderEmail3, letterOfSupportSenderRelationship3, submitted FROM teachingawardstudent ORDER BY submitted DESC, lastName ASC, firstName ASC")
     
     numrows = int(cur.rowcount)
     index_entries = []
-    print numrows, 'rows returned\n'
+    print numrows, 'rows loaded\n'
 
     if not os.path.exists(top_output_dir):
         print 'Creating directory', top_output_dir
@@ -288,15 +288,20 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
         submitted = '' if row['submitted']==1 else '[not submitted]'
         index_entries.append((html_index_entry % row, output_filename, submitted))
     
+    print '\nGenerating index...'
     index_entries = ['<li style="padding-bottom:0.5ex;"><a href="%s">%s</a> %s</li>' % (i[1], i[0], i[2]) for i in index_entries]
     index_entries = '\n'.join(index_entries)
     html = html_index % {'list' : index_entries, 'year' : YEAR}
     
+    print 'Writing index file...'
     outfile = open(os.path.join(top_output_dir, 'index.html'), 'w')
     outfile.write(html)
     outfile.close()
     
+    print 'Disconnecting from Gmail...'
     get_letters.disconnect()
+
+    print '\nDONE.'
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
