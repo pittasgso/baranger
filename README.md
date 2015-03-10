@@ -538,7 +538,19 @@ To create the reviews, you will need to connect to the VPN with the
 `Firewall-CSSD-SSLVPN-EWI-Departmental-MySql-Server-DB-Access-NetworkConnect`
 role as described above.
 
-Now, in the `create_reviews` directory, run:
+Since generating the review files is resource-intensive, the following line
+near the bottom of `create_reviews/main.py` may be commented out:
+
+~~~ {.python}
+# UNCOMMENT THE LINE BELOW WHEN READY TO GENERATE THE REVIEW FILES
+main(args.dbhostname, args.dbusername, args.dbpassword, args.dbdatabase, args.email, args.password)
+~~~
+
+While it's probably a good idea to try running this script once first without
+actually generating the files (to ensure all of the dependencies are properly
+installed), make sure this line is uncommented when you're ready to go for real.
+
+Once everything's set, in the `create_reviews` directory, run:
 
 ~~~
 python main.py --password "EMAIL_PASSWORD" --dbpassword "DB_PASSWORD"
@@ -558,7 +570,7 @@ to match up the letters to the information from the database.  As it does this,
 it'll print out its progress (telling you which applicant it's on).
 
 If you see the following, that means it was unable to find the Gmail label for
-the particular applicant:
+the particular applicant automatically:
 
 ~~~
 Folder not found for Bruce Wayne (appID=qNOloaCie3gmNMSW).
@@ -566,7 +578,7 @@ Please enter true label:
 ~~~
 
 In the example above, it is asking you to enter the Gmail label for Bruce Wayne
-because it couldn't find the label.  This could happen because Bruce Wayne may
+because it couldn't find the label automatically.  This could happen because Bruce Wayne may
 have used a different last name in the application than you used in the Gmail label.
 It may also have happened because two people had the same last name (e.g. "Bruce
 Wayne" and "Pauline Wayne") and so you gave both of them different labels.

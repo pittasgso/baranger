@@ -285,7 +285,7 @@ if __name__ == '__main__':
     try:
         print 'main', args
         # UNCOMMENT THE LINE BELOW WHEN READY TO GENERATE THE REVIEW FILES
-        #main(args.dbhostname, args.dbusername, args.dbpassword, args.dbdatabase, args.email, args.password)
+        main(args.dbhostname, args.dbusername, args.dbpassword, args.dbdatabase, args.email, args.password)
     except mdb.Error, e:
         print "Error %d: %s" % (e.args[0],e.args[1])
         sys.exit(1)
