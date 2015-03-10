@@ -120,7 +120,7 @@ def generate_content(row, top_output_dir, skip_if_exists=False):
     output_dir = os.path.join(top_output_dir, applicant_name)
     relative_dir = os.path.join(applicant_name)
     if not os.path.exists(output_dir):
-        print 'making', output_dir
+        print 'creating directory', output_dir
         os.mkdir(output_dir)
     elif skip_if_exists:
         return os.path.join(relative_dir, 'index.html')
@@ -167,7 +167,7 @@ def generate_content(row, top_output_dir, skip_if_exists=False):
         else:
             #they entered letter writers
             beep()
-            label = raw_input('Folder not found for '+row['firstName']+' '+row['lastName']+' (appID='+row['appID']+').\nPlease enter true label: ')
+            label = raw_input('Gmail label not found for '+row['firstName']+' '+row['lastName']+' (appID='+row['appID']+').\nPlease enter true Gmail label (or blank if none): ')
     if label == '':
         emails = []
     else:
@@ -239,21 +239,27 @@ def generate_content(row, top_output_dir, skip_if_exists=False):
 def main(db_hostname, db_username, db_password, database, email_username, email_password, top_output_dir='review'):
     skip_student_if_exists=False
     global con
+    print 'Connecting to database...'
     con = mdb.connect(db_hostname, db_username, db_password, database)
     cur = con.cursor(mdb.cursors.DictCursor)
-    
+
+    print 'Connecting to Gmail...'
     get_letters.connect(email_username, email_password)
     
     if not os.path.exists(top_output_dir):
-        print 'making', top_output_dir
+        print 'Creating directory', top_output_dir
         os.mkdir(top_output_dir)
     
+    print 'Executing database query...'
     cur.execute("SELECT appID, firstName, lastName, pittUsername, department, yearsOfStudy, onCampusAddress, offCampusAddress, phoneNumber, teachingPhilosophy, teachingChallenge, teachingReflection, exampleOfWrittenTeachingMaterial, ometEvaluation1, ometEvaluation2, letterOfSupportSenderName1, letterOfSupportSenderEmail1, letterOfSupportSenderRelationship1, letterOfSupportSenderName2, letterOfSupportSenderEmail2, letterOfSupportSenderRelationship2, letterOfSupportSenderName3, letterOfSupportSenderEmail3, letterOfSupportSenderRelationship3, submitted FROM teachingawardstudent ORDER BY submitted DESC, lastName ASC, firstName ASC")
     
     numrows = int(cur.rowcount)
     index_entries = []
+    print numrows, 'rows returned\n'
+
     for i in range(numrows):
         row = cur.fetchone()
+        print '----------'
         print str(i+1)+'/'+str(numrows), row['appID'], (row['lastName'] + ', ' + row['firstName'])
         output_filename = generate_content(row, top_output_dir, skip_if_exists=skip_student_if_exists)
         
