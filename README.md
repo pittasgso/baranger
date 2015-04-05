@@ -606,11 +606,29 @@ once the winners have been selected.  You can easily do this by setting the
 Review Applications
 =
 
-TODO. Pick the best few candidates from each category (i.e., social sciences,
-natural sciences, humanities), forward those to a faculty board and have them
-pick the winners (e.g., 2 from each category)
+Obtain a dedicated group of volunteer reviewers to review the applications.
+Each application should be reviewed by 2 or 3 student reviewers and at least 1
+faculty reviewer.
 
-Optional: Have an Honorable Mention. See the timeline.
+Upon sharing the zipped applications with reviewers, each reviewer should be
+semi-randomly assigned a particular set of applications to review, such that
+enough reviewers are assigned to each application.  While reviewers should be
+assigned applications from similar fields within their own academic division
+(humanities, social sciences, natural sciences), they should never review
+applications from their own department.
+**(TODO: Automate this process.)**
+
+Reviewers should make use of a rubric to score each of their assigned
+applications and submit their scores to the Committee.  The Committee should
+then compile these scores from all reviewers and run statistics against them.
+
+Afterwards, it is the responsibility of the Committee to make the final
+selection of the best two candidates from each academic division, assisted by
+(but not bound by) the compiled reviewer scores.  In addition to these six
+awards, the Committee may opt to issue a seventh award to the third-place
+candidate in any one division, subject to budgetary constraints.  Honorable
+mentions may also be given to any other close contenders; these carry no cash
+prize, but typically include an invitation to the luncheon.
 
 
 About This Document
