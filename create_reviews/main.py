@@ -22,6 +22,11 @@ con = None
 
 localTZ = timezone('America/New_York')
 
+csv_template = '''ready to send,appID,First Name,Last Name,Email Address,Department
+%(list)s
+'''
+csv_applicant_entry = 'True,%(appID)s,%(firstName)s,%(lastName)s,%(pittUsername)s,%(department)s'
+
 html_index = '''<html>
 <head>
     <title>%(year)s Baranger Award Application Review Materials</title>
@@ -273,6 +278,7 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
     
     numrows = int(cur.rowcount)
     index_entries = []
+    csv_entries = []
     print numrows, 'rows loaded\n'
 
     if not os.path.exists(top_output_dir):
@@ -287,6 +293,8 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
         
         submitted = '' if row['submitted']==1 else '[not submitted]'
         index_entries.append((html_index_entry % row, output_filename, submitted))
+        if row['submitted']==1:
+            csv_entries.append((csv_applicant_entry % row))
     
     print '\nGenerating index...'
     index_entries = ['<li style="padding-bottom:0.5ex;"><a href="%s">%s</a> %s</li>' % (i[1], i[0], i[2]) for i in index_entries]
@@ -296,6 +304,13 @@ def main(db_hostname, db_username, db_password, database, email_username, email_
     print 'Writing index file...'
     outfile = open(os.path.join(top_output_dir, 'index.html'), 'w')
     outfile.write(html)
+    outfile.close()
+
+    print 'Writing CSV file...'
+    csv_entries = '\n'.join(csv_entries)
+    csv = csv_template % {'list' : csv_entries}
+    outfile = open(os.path.join(top_output_dir, 'baranger-applicants-'+YEAR+'.csv'), 'w')
+    outfile.write(csv)
     outfile.close()
     
     print 'Disconnecting from Gmail...'

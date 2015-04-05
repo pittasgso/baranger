@@ -633,6 +633,22 @@ mentions may also be given to any other close contenders; these carry no cash
 prize, but typically include an invitation to the luncheon.
 
 
+Notify Applicants of Results
+=
+
+The review material generator above will have created a CSV file named
+something like `baranger-applicants-2015.csv` in the root directory of the zip
+folder which contains a list of all nominees who submitted applications.
+(We don't really want to notify non-applicants, for instance, that they didn't win.)
+Copy this file into `data/2015`, and **manually** break it apart into three files:
+One each for winners, honorable mentions, and nonwinners.
+Be sure to keep the header line in each file.
+
+* `data/2015/03-2015-post-notification-1-winners.csv`
+* `data/2015/03-2015-post-notification-2-honorable.csv`
+* `data/2015/03-2015-post-notification-3-nonwinners.csv`
+
+
 About This Document
 =
 
