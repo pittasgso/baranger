@@ -26,28 +26,28 @@ def sendNominationEmail(applicantName, email, department, link):
     subject = '2013-2014 Elizabeth Baranger Excellence in Teaching Award'
     body = """Dear %s,
 
-Thank you for submitting your application for the 2013-2014 Elizabeth 
-Baranger Excellence in Teaching Award. Your nomination for the award is an 
-honor in itself, indicating your dedication to the advancement of 
-undergraduate education at the University of Pittsburgh. The graduate 
-students nominated for this year's award represent a wide range of 
-departments within Arts and Sciences and a diversity of roles held by 
-graduate students including recitation leaders, teaching assistants and 
+Thank you for submitting your application for the 2013-2014 Elizabeth
+Baranger Excellence in Teaching Award. Your nomination for the award is an
+honor in itself, indicating your dedication to the advancement of
+undergraduate education at the University of Pittsburgh. The graduate
+students nominated for this year's award represent a wide range of
+departments within Arts and Sciences and a diversity of roles held by
+graduate students including recitation leaders, teaching assistants and
 independent instructors.
  
-We are pleased to inform you that you have earned an Honorable Mention in 
-this year's Elizabeth Baranger Excellence in Teaching Awards. Your 
-commitment to teaching and undergraduate education was evident through 
-recommendations and student evaluations, while your teaching materials 
-offered superior principles of pedagogy and methods of instruction. We had 
-many nominations this year for just seven awards, and the competition was 
-fierce. Although you are not one of the seven winners this year, we wanted 
-to recognize your considerable teaching nonetheless. Keep up the good work! 
-It is clear that your students learning a lot, and enjoying it. We'll keep 
+We are pleased to inform you that you have earned an Honorable Mention in
+this year's Elizabeth Baranger Excellence in Teaching Awards. Your
+commitment to teaching and undergraduate education was evident through
+recommendations and student evaluations, while your teaching materials
+offered superior principles of pedagogy and methods of instruction. We had
+many nominations this year for just seven awards, and the competition was
+fierce. Although you are not one of the seven winners this year, we wanted
+to recognize your considerable teaching nonetheless. Keep up the good work!
+It is clear that your students learning a lot, and enjoying it. We'll keep
 an eye out for your name next time nominations come around!
  
-We also invite you to an awards luncheon to be held in your honor on Friday, 
-April 11, 2014 at 12:30pm at Lucca Ristorante, 317 S Craig St in Oakland. 
+We also invite you to an awards luncheon to be held in your honor on Friday,
+April 11, 2014 at 12:30pm at Lucca Ristorante, 317 S Craig St in Oakland.
 Please let us know if you will be unable to attend. 
  
 Again... our congratulations!
