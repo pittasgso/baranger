@@ -616,11 +616,13 @@ enough reviewers are assigned to each application.  While reviewers should be
 assigned applications from similar fields within their own academic division
 (humanities, social sciences, natural sciences), they should never review
 applications from their own department.
-**(TODO: Automate this process.)**
+**(TODO: Automate this process, and hook it into the database so people can
+review directly from the web instead of using the zip file.)**
 
 Reviewers should make use of a rubric to score each of their assigned
 applications and submit their scores to the Committee.  The Committee should
 then compile these scores from all reviewers and run statistics against them.
+**(TODO: This could also be automated.)**
 
 Afterwards, it is the responsibility of the Committee to make the final
 selection of the best two candidates from each academic division, assisted by
