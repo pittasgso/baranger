@@ -9,7 +9,7 @@ TESTING_EMAIL = 'timparenti+test@cs.pitt.edu'
 
 password = ''
 
-def sendNominationEmail(applicantName, email, department, link):
+def sendPostNotificationEmail(applicantName, email, department):
 
 
     """ Based on http://segfault.in/2010/12/sending-gmail-from-python/ """
@@ -81,12 +81,10 @@ if __name__ == '__main__':
     EMAILCOLUMN = 4
     DEPARTMENTCOLUMN = 5
 
-    LINKCOLUMN = 7
-
     try:
         sourceFile = sys.argv[1]
     except IndexError:
-        sourceFile = 'nominations.csv'
+        sourceFile = 'applicants-honorable.csv'
 
     csvIn = csv.reader(open(sourceFile, 'r'))
 
@@ -101,7 +99,7 @@ if __name__ == '__main__':
         if len(row) == 0: continue
         
         if (row[READYTOSENDCOLUMN] in ['True','TRUE','1']):
-            sendNominationEmail(row[FIRSTNAMECOLUMN] + " " + row[LASTNAMECOLUMN], row[EMAILCOLUMN], row[DEPARTMENTCOLUMN], row[LINKCOLUMN])
+            sendPostNotificationEmail(row[FIRSTNAMECOLUMN] + " " + row[LASTNAMECOLUMN], row[EMAILCOLUMN], row[DEPARTMENTCOLUMN])
         else:
             print 'Skipped: ', row[FIRSTNAMECOLUMN] + " " + row[LASTNAMECOLUMN]
         count = count + 1
