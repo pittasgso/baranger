@@ -23,24 +23,15 @@ def sendNominationEmail(applicantName, email, department, link):
 
     realEmail = email
     #email = TESTING_EMAIL
-    subject = '2013-2014 Elizabeth Baranger Excellence in Teaching Award'
+    subject = '2015 Elizabeth Baranger Excellence in Teaching Award'
     body = """Dear %s,
 
-Thank you for submitting your application for the 2013-2014 Elizabeth
-Baranger Excellence in Teaching Award. Your nomination for the award is an
-honor in itself, indicating your dedication to the advancement of
-undergraduate education at the University of Pittsburgh. The graduate
-students nominated for this year's award represent a wide range of
-departments within Arts and Sciences and a diversity of roles held by
-graduate students including recitation leaders, teaching assistants and
-independent instructors.
-
-With many nominees and after weeks of deliberation among both faculty
-members and graduate students, we regret to inform you that you were not
-among the few selected winners of this year's Baranger Teaching Award. Your
-dedication to teaching and your ability to create the passionate learning
-environment that we all desire for the University of Pittsburgh is highly
-admirable. We thank you for your excellent teaching, which has clearly made
+We regret to inform you that you were not among the few selected winners of
+this year's Baranger Teaching Award. Your dedication to teaching and your
+ability to create the passionate learning environment that we all desire for
+the University of Pittsburgh is highly admirable. Both faculty and graduate
+student reviewers had excellent things to say about your application
+materials. We thank you for your excellent teaching, which has clearly made
 an impact. Keep up the good work, and we'll keep an eye out for your name
 next time nominations come around!
 
@@ -49,7 +40,7 @@ in research and teaching.
 
 Sincerely,
  
-The Elizabeth Baranger Excellence in Teaching Award Committee, 2013-2014
+The Elizabeth Baranger Excellence in Teaching Award Committee, 2014-2015
 """ % (applicantName)
      
     headers = ["From: " + sender,
