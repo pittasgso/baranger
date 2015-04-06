@@ -662,7 +662,8 @@ and the subject.
 
 Since we _really_ don't want to send false congratulations to nonwinners, for example,
 consider running a script or two against a dummy list with just yourself, as before.
-Once you're confident with everything, run each script once on its corresponding data file:
+Once you're confident with everything, **VERY CAREFULLY** run each script once
+on its **corresponding** data file:
 
 ~~~
 ./gmail_imap/sendPostEmail1winners.py data/2015/03-2015-post-notification-1-winners.csv
@@ -670,7 +671,9 @@ Once you're confident with everything, run each script once on its corresponding
 ./gmail_imap/sendPostEmail3nonwinners.py data/2015/03-2015-post-notification-3-nonwinners.csv
 ~~~
 
-All of the same caveats pertaining to dealing with Gmail apply here, just as before.
+**Again, BE VERY CAREFUL** to map each script to its data file correctly.
+All of the other caveats pertaining to dealing with Gmail also apply here, just as before.
+**(TODO: Combine these scripts and files to have one script send all three types of notification.)**
 
 After these notifications are sent, continue checking the Gmail account for
 further correspondence until about a week after the awards luncheon.
