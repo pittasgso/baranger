@@ -675,7 +675,8 @@ on its **corresponding** data file:
 All of the other caveats pertaining to dealing with Gmail also apply here, just as before.
 **(TODO: Combine these scripts and files to have one script send all three types of notification.)**
 
-After these notifications are sent, continue checking the Gmail account for
+After these notifications are sent, post the winners and honorable mentions
+to the teaching awards page of the A&S-GSO website.  Continue checking the Gmail account for
 further correspondence until about a week after the awards luncheon.
 In particular, luncheon invitees will typically respond to this address.
 
