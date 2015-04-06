@@ -28,7 +28,7 @@ def sendPostNotificationEmail(applicantName, email, department):
 
 We are tremendously pleased to inform you that you have earned one of this
 year's Elizabeth Baranger Excellence in Teaching Awards and a $250 prize
-that will be added to your paycheck. Your commitment to teaching and
+that will be added to an upcoming paycheck. Your commitment to teaching and
 undergraduate education was evident through recommendations and student
 evaluations, while your teaching materials offered superior principles of
 pedagogy and methods of instruction. The entire Baranger Award committee
