@@ -672,6 +672,10 @@ Once you're confident with everything, run each script once on its corresponding
 
 All of the same caveats pertaining to dealing with Gmail apply here, just as before.
 
+After these notifications are sent, continue checking the Gmail account for
+further correspondence until about a week after the awards luncheon.
+In particular, luncheon invitees will typically respond to this address.
+
 
 About This Document
 =
