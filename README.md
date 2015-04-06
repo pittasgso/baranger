@@ -648,6 +648,30 @@ Be sure to keep the header line in each file.
 * `data/2015/03-2015-post-notification-2-honorable.csv`
 * `data/2015/03-2015-post-notification-3-nonwinners.csv`
 
+Like when sending the initial emails, double-check that the columns in these files
+match up with the definitions in the Python scripts under the line which reads:
+
+~~~ {.python}
+if __name__ == '__main__':
+~~~
+
+**Update the email text in each script** to be sure to send out the right details
+for the luncheon, etc.  Take particular note of the amount of the cash prize, as well
+as the total number of awards given.  Don't forget to change the years in both the text
+and the subject.
+
+Since we _really_ don't want to send false congratulations to nonwinners, for example,
+consider running a script or two against a dummy list with just yourself, as before.
+Once you're confident with everything, run each script once on its corresponding data file:
+
+~~~
+./gmail_imap/sendPostEmail1winners.py data/2015/03-2015-post-notification-1-winners.csv
+./gmail_imap/sendPostEmail2honorable.py data/2015/03-2015-post-notification-2-honorable.csv
+./gmail_imap/sendPostEmail3nonwinners.py data/2015/03-2015-post-notification-3-nonwinners.csv
+~~~
+
+All of the same caveats pertaining to dealing with Gmail apply here, just as before.
+
 
 About This Document
 =
